@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.LaCasaDorada;
 
 public class Main extends Application{
 	private LaCasaDoradaGUI laCasaDoradaGUI;
+	private LaCasaDorada laCasaDorada;
 	
 	public Main () {
 		laCasaDoradaGUI  =new LaCasaDoradaGUI();
@@ -19,7 +21,7 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginUi.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("mainPane.fxml"));
 
 		fxmlLoader.setController(laCasaDoradaGUI);
 		
@@ -27,7 +29,7 @@ public class Main extends Application{
 		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Contact Manager");
+		primaryStage.setTitle("La Casa Dorada");
 		primaryStage.show();
 	}
 
