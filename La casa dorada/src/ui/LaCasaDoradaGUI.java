@@ -17,6 +17,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class LaCasaDoradaGUI {
+	
+	MenuGUI menuGUI = new MenuGUI();
 
     @FXML
     private BorderPane mainPane;
@@ -34,11 +36,19 @@ public class LaCasaDoradaGUI {
     			//loadMenu();
     			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("menu.fxml"));
     	    	
-    	    	fxmlloader.setController(this);
-    	    	
+    			Stage stage1 = (Stage) mainPane.getScene().getWindow();
+    			stage1.close();
+    			
+    	    	fxmlloader.setController(menuGUI);
     	    	Parent menu = fxmlloader.load();  
-    	    	mainPane.getChildren().clear();
-    	    	mainPane.setCenter(menu);
+    	    	Scene scene = new Scene(menu);
+    	    	Stage stage = new Stage();
+    	    	stage.setScene(scene);
+    	    	stage.setTitle("La casa Dorada");
+    	    	stage.setResizable(false);
+    	    	stage.show();
+    	    	
+    	    	
     		}else {
         		Alert alert = new Alert(AlertType.WARNING);
         		alert.setTitle("Wrong username or password");
@@ -58,38 +68,5 @@ public class LaCasaDoradaGUI {
     		pfPassword.clear();
     	}
     }
-    /*public void loadMenu() throws IOException {
-    	FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("menu.fxml"));
-    	
-    	fxmlloader.setController(this);
-    	
-    	Parent listPane = fxmlloader.load();  
-    	mainPane.getChildren().clear();
-    	mainPane.setCenter(listPane);
-    }
-    */
-    //MENU
-    
-    	@FXML
-    	private BorderPane mainPane2;
-        @FXML
-        private MenuItem mMenu;
-
-        @FXML
-        private MenuItem mMngmt;
-
-        @FXML
-        private MenuItem mClients;
-
-        @FXML
-        private MenuItem mEmployees;
-
-        @FXML
-        private MenuItem mOrders;
-
-        @FXML
-        private MenuItem mMore;
-
-        @FXML
-        private BorderPane borderPane;
 }
+  

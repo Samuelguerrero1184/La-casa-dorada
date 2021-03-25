@@ -32,5 +32,9 @@ public class Main extends Application{
 		primaryStage.setTitle("La Casa Dorada");
 		primaryStage.show();
 	}
+	
+	public void closeLogin() {
+		
+	}
 
 }

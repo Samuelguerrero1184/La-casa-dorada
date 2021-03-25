@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="850.0" style="-fx-background-color: #e3e3a8;">
+         <children>
+            <Label layoutX="23.0" layoutY="7.0" text="Client List">
+               <font>
+                  <Font name="Berlin Sans FB" size="33.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ScrollPane fx:id="tablePane" fitToHeight="true" fitToWidth="true" layoutY="50.0" prefHeight="400.0" prefWidth="850.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tvClientsList" layoutX="-1.0" prefHeight="400.0" prefWidth="850.0">
+                    <columns>
+                      <TableColumn fx:id="tcName" prefWidth="130.0" resizable="false" text="Nombres" />
+                      <TableColumn fx:id="tcLastName" prefWidth="130.0" resizable="false" text="Apellidos" />
+                        <TableColumn fx:id="tcId" prefWidth="110.0" resizable="false" text="C.C" />
+                        <TableColumn fx:id="tcAddress" prefWidth="100.0" resizable="false" text="Dirección" />
+                        <TableColumn fx:id="tcPhone" prefWidth="100.0" resizable="false" text="Teléfono" />
+                        <TableColumn fx:id="tcComments" prefWidth="279.0" text="Observaciones" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</Pane>

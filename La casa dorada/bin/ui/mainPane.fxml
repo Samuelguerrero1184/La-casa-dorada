@@ -14,8 +14,8 @@
          <children>
             <AnchorPane layoutX="486.0" layoutY="51.0" prefHeight="271.0" prefWidth="296.0">
                <children>
-                  <TextField fx:id="txtUsername" layoutX="74.0" layoutY="43.0" promptText="username" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #8fa364;" />
-                  <PasswordField fx:id="pfPassword" layoutX="74.0" layoutY="111.0" promptText="password" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #8fa364;" />
+                  <TextField fx:id="txtUsername" layoutX="74.0" layoutY="43.0" promptText="username" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #e3e3a8;" />
+                  <PasswordField fx:id="pfPassword" layoutX="74.0" layoutY="111.0" promptText="password" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #e3e3a8;" />
                   <Button id="loginBtn" alignment="CENTER" graphicTextGap="6.0" layoutX="91.0" layoutY="176.0" lineSpacing="2.0" mnemonicParsing="false" onAction="#loginUser" prefHeight="46.0" prefWidth="115.0" style="-fx-background-color: #16b823; -fx-text-fill: #ffffff;" text="Login" />
                </children>
             </AnchorPane>

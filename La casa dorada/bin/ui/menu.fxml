@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane fx:id="mainPane2" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="850.0">
@@ -19,7 +18,7 @@
                     <items>
                       <MenuItem fx:id="mMenu" mnemonicParsing="false" text="MENU" />
                         <MenuItem fx:id="mMngmt" mnemonicParsing="false" text="MANEJO PROD." />
-                        <MenuItem fx:id="mClients" mnemonicParsing="false" text="CLIENTES" />
+                        <MenuItem fx:id="mClients" mnemonicParsing="false" onAction="#loadClientsMngmt" text="CLIENTES" />
                         <MenuItem fx:id="mEmployees" mnemonicParsing="false" text="EMPLEADOS" />
                         <MenuItem fx:id="mOrders" mnemonicParsing="false" text="PEDIDOS" />
                         <MenuItem fx:id="mMore" mnemonicParsing="false" text="MAS..." />
