@@ -1,11 +1,21 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Product {
-	
-	private String name;
-	private String tipo;
-	private Ingredients[]ingredients;
-	private float sizes;
+ private String name;
+private String tipo;
+private String size;
+private ArrayList<Ingredients> ingredients;
+	public Product(String name, String tipo, String size){
+		this.name = name;
+		this.tipo = tipo;
+		this.size = size;
+		ingredients = new ArrayList<Ingredients>();
+	}
+	public void addIngredient(Ingredients newIngredient){
+		ingredients.add(newIngredient);
+	}
 	public String getName() {
 		return name;
 	}
@@ -18,17 +28,16 @@ public class Product {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public Ingredients[] getIngredients() {
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public ArrayList<Ingredients> getIngredients() {
 		return ingredients;
 	}
-	public void setIngredients(Ingredients[] ingredients) {
+	public void setIngredients(ArrayList<Ingredients> ingredients) {
 		this.ingredients = ingredients;
 	}
-	public float getSizes() {
-		return sizes;
-	}
-	public void setSizes(float sizes) {
-		this.sizes = sizes;
-	}
-	
 }

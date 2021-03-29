@@ -1,21 +1,21 @@
 package model;
 
 public class Client extends Person {
-private float id;
+private String id;
 private String address;
 private String phone;
 private String comments;
-	public Client (String name, String lastname, float id, String address, String phone, String comments){
+	public Client (String name, String lastname, String id, String address, String phone, String comments){
 		super(name, lastname);
 		this.id = id;
 		this.address = address;
 		this.phone = phone;
 		this.comments = comments;
 	}
-	public float getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(float id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getAddress() {

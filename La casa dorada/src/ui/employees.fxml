@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="employeePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="850.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="55.0" prefHeight="320.0" prefWidth="850.0" style="-fx-background-color: white;">
+         <children>
+            <AnchorPane prefHeight="320.0" prefWidth="312.0">
+               <children>
+                  <GridPane alignment="CENTER" layoutX="40.0" layoutY="67.0" prefHeight="215.0" prefWidth="209.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="nameE" GridPane.columnIndex="1" />
+                        <TextField fx:id="lastNameE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="identificationE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Nombres" />
+                        <Label text="Apellidos" GridPane.rowIndex="1" />
+                        <Label text="C.C" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Label layoutX="40.0" layoutY="20.0" text="Agregar empleado">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="addclientBtnE" layoutX="348.0" layoutY="122.0" mnemonicParsing="false" onAction="#addEmployee2List" prefHeight="55.0" prefWidth="155.0" text="Agregar" />
+            <Button fx:id="clearFormBtnE" layoutX="348.0" layoutY="191.0" mnemonicParsing="false" onAction="#clearFormE" prefHeight="25.0" prefWidth="155.0" text="Borrar" />
+            <Label fx:id="addStatusE" layoutX="544.0" layoutY="129.0" prefHeight="40.0" prefWidth="287.0" />
+         </children>
+      </AnchorPane>
+      <Pane prefHeight="55.0" prefWidth="850.0" style="-fx-background-color: #e3e3a8;">
+         <children>
+            <Label layoutX="14.0" layoutY="8.0" prefHeight="38.0" prefWidth="347.0" text="Gestion de Empleados">
+               <font>
+                  <Font name="Berlin Sans FB" size="35.0" />
+               </font>
+            </Label>
+            <Button fx:id="EmployeeListBtn" layoutX="732.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadEmployeeList" prefHeight="30.0" prefWidth="104.0" style="-fx-background-color: #16b823;" text="Ver empleados" textFill="WHITE" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -8,17 +8,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.LaCasaDorada;
 
 public class LaCasaDoradaGUI {
 	
-	MenuGUI menuGUI = new MenuGUI();
+	private LaCasaDorada laCasaDorada;
+	private MenuGUI menuGUI;
+	
+	public LaCasaDoradaGUI() {
+		laCasaDorada = new LaCasaDorada();
+		menuGUI = new MenuGUI(laCasaDorada);
+		
+	}
+	
+	public void initialize() {
+    	//the method (initialize) is called several times by diferents fxml file loads 
+    }
 
     @FXML
     private BorderPane mainPane;
