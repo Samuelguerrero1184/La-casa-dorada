@@ -13,6 +13,7 @@ private ArrayList<Ingredients> ingredients;
 		this.size = size;
 		ingredients = new ArrayList<Ingredients>();
 	}
+	
 	public void addIngredient(Ingredients newIngredient){
 		ingredients.add(newIngredient);
 	}

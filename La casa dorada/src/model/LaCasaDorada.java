@@ -18,28 +18,31 @@ public class LaCasaDorada {
 	private List<User>userAcc;
 	private List<Client>clients;
 	private List<Employee>employee;
-	
+	private List<Product>products;
+	private List<Ingredients>ingredients;
 	public LaCasaDorada () {
 		userAcc = new ArrayList<>();
 		clients = new ArrayList<>();
 		employee = new ArrayList<>();
+		products = new ArrayList<>();
+		ingredients = new ArrayList<>();
+		
 	}
 	
 	public void addClient(String na, String in, String id, String add, String phone, String comments)throws IOException {
 		/*int counter = 0;
-		int x = this.getClients().size()+1;
+		int x = this.getClients().size();
 		Client[]array = new Client[x];
-		for (int i = 0; i<x;i++) {					
+		for (int i = 1; i<x;i++) {					
 			array[i]=this.getClients().get(i);
 		}
-		while (counter<x && na.compareToIgnoreCase(array[counter].getName())<=0){
+		while (counter<x && na.compareToIgnoreCase(array[counter].getName())>0){
 			counter++;
 		}
 		for (int i = x; i >counter; i--) {
 			clients.set(i, clients.get(i-1));
 		}
-		clients.set(counter-1, new Client(na, in, id, add, phone, comments));
-		*/
+		clients.set(counter-1, new Client(na, in, id, add, phone, comments));*/
 		clients.add(new Client(na, in, id, add, phone, comments));
 		saveClients();
 	}
@@ -47,7 +50,11 @@ public class LaCasaDorada {
 		employee.add(new Employee(na, in, id));
 		saveEmployees();
 	}
-	
+	public void addIngredient(String name)throws IOException{
+		ingredients.add(new Ingredients(name));
+		saveIngredients();
+		
+	}
 	public List<User> getUserAcc(){
 		return userAcc;
 	}
@@ -56,6 +63,12 @@ public class LaCasaDorada {
 	}
 	public List<Employee> getEmployee(){
 		return employee;
+	}
+	public List<Product> getProducts(){
+		return products;
+	}
+	public List<Ingredients>getIngredients(){
+		return ingredients;
 	}
 	
 	
@@ -70,6 +83,12 @@ public class LaCasaDorada {
 			FileOutputStream fos = new FileOutputStream("data/Saved_employees.va");
 			ObjectOutputStream out = new ObjectOutputStream(fos);
 			out.writeObject(employee);
+			out.close();
+		}
+			public void saveIngredients() throws IOException {
+			FileOutputStream fos = new FileOutputStream("data/Saved_ingredients.va");
+			ObjectOutputStream out = new ObjectOutputStream(fos);
+			out.writeObject(ingredients);
 			out.close();
 		}
 
@@ -87,6 +106,13 @@ public class LaCasaDorada {
 			FileInputStream fis = new FileInputStream(eload);
 			ObjectInputStream input = new ObjectInputStream(fis);
 			employee = (ArrayList<Employee>) input.readObject();
+			input.close();
+		}
+		File iload = new File("data/Saved_ingredients.va");
+		if (iload.exists()) {
+			FileInputStream fis = new FileInputStream(iload);
+			ObjectInputStream input = new ObjectInputStream(fis);
+			ingredients = (ArrayList<Ingredients>) input.readObject();
 			input.close();
 		}
 		}
@@ -122,13 +148,13 @@ public class LaCasaDorada {
 		Employee veh = null;
 		String str = "";
 		boolean found = false;
-		int start = 0;
-		int end = employee.size();
+		float start = 0;
+		float end = employee.size();
 		while (start <= end && !found) {
 			int medium = (int) Math.floor((start + end) / 2);
 			if (medium != employee.size()) {
 				String mediumElement = employee.get(medium).getId();
-				int compareResult = id.compareToIgnoreCase(mediumElement);
+				float compareResult = id.compareToIgnoreCase(mediumElement);
 				if (compareResult == 0) {
 					found = true;
 					veh = employee.get(medium);
@@ -163,9 +189,10 @@ public class LaCasaDorada {
 				if (compareResult == 0) {
 					found = true;
 					veh = employee.get(medium);
-					str += "Se eliminó el siguiente empleado";
+					str += "Se eliminó el siguiente empleado\n";
 					str +=veh.getName() + "\n" + veh.getLastname() + "\n"+ veh.getId() + "\n";
 					employee.remove(veh);
+					saveEmployees();
 				} else if (compareResult < 0)
 					end = medium - 1;
 				else if (compareResult > 0)
@@ -180,4 +207,95 @@ public class LaCasaDorada {
 		return str;
 
 	}
+	public String searchIngredients(int code) throws IOException  {
+		Collections.sort(ingredients, new IngredientsCodeSort());
+		Ingredients sel = null;
+		String str = "";
+		boolean found = false;
+		int start = 0;
+		int end = ingredients.size();
+		while (start <= end && !found) {
+			int medium = (int) Math.floor((start + end) / 2);
+			if (medium != ingredients.size()) {
+				int mediumElement = ingredients.get(medium).getCode();
+				int compareResult = code - mediumElement ;
+				if (compareResult == 0) {
+					found = true;
+					sel = ingredients.get(medium);
+					str += sel.getName() + "\n" + sel.getCode() + "\n";
+				} else if (compareResult < 0)
+					end = medium - 1;
+				else if (compareResult > 0)
+					start = medium + 1;
+			}
+		}
+		if (found == false) {
+			str = "No hay ningun Productpo con el codigo: " + code + "\n";
+			
+		}
+		
+		return str;
+	}
+	public String deleteIngredients(int code) throws IOException  {
+		Collections.sort(ingredients, new IngredientsCodeSort());
+		Ingredients sel = null;
+		String str = "";
+		boolean found = false;
+		int start = 0;
+		int end = ingredients.size();
+		while (start <= end && !found) {
+			int medium = (int) Math.floor((start + end) / 2);
+			if (medium != ingredients.size()) {
+				int mediumElement = ingredients.get(medium).getCode();
+				int compareResult = code - mediumElement ;
+				if (compareResult == 0) {
+					found = true;
+					sel = ingredients.get(medium);
+					str += "Se eliminó el siguiente empleado\n";
+					str += sel.getName() + "\n" + sel.getCode() + "\n";
+					ingredients.remove(sel);
+					saveIngredients();
+				} else if (compareResult < 0)
+					end = medium - 1;
+				else if (compareResult > 0)
+					start = medium + 1;
+			}
+		}
+		if (found == false) {
+			str = "No hay ningun Productpo con el codigo: " + code + "\n";
+			
+		}
+		
+		return str;
+	}
+	public String searchProduct(String name) {
+		Collections.sort(products, new ProductNameSort());
+		Product veh = null;
+		String str = "";
+		boolean found = false;
+		float start = 0;
+		float end = products.size();
+		while (start <= end && !found) {
+			int medium = (int) Math.floor((start + end) / 2);
+			if (medium != products.size()) {
+				String mediumElement = products.get(medium).getName();
+				float compareResult = name.compareToIgnoreCase(mediumElement);
+				if (compareResult == 0) {
+					found = true;
+					veh = products.get(medium);
+					str += "Esta es la informacion del Producto:\n Producto: ";
+					str +=veh.getName() + "\n Tipo: " + veh.getTipo() + "\nTamaño Y Precios: "+ veh.getSize() + "\n";
+				} else if (compareResult < 0)
+					end = medium - 1;
+				else if (compareResult > 0)
+					start = medium + 1;
+			}
+		}
+		if (found == false) {
+			str = "No se encontro el producto '" + name +"'\n";
+			
+		}
+		return str;
+	}
+	
 }

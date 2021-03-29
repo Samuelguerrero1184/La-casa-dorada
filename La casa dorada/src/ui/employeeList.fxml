@@ -40,9 +40,9 @@
                         <Label layoutX="177.0" layoutY="6.0" text="Gestionar Empleado" />
                         <AnchorPane fx:id="gestionEmployee" layoutX="86.0" layoutY="83.0" prefHeight="197.0" prefWidth="290.0">
                            <children>
-                              <Label fx:id="prueba" layoutX="139.0" layoutY="60.0" prefHeight="28.0" prefWidth="12.0">
+                              <Label fx:id="prueba" layoutX="5.0" layoutY="57.0" prefHeight="50.0" prefWidth="291.0">
                                  <font>
-                                    <Font size="19.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
                               <Button fx:id="eliminateEmployee" layoutX="40.0" layoutY="145.0" mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="37.0" prefWidth="210.0" text="Eliminar" visible="false" />

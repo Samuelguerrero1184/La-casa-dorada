@@ -16,8 +16,8 @@
                <menus>
                   <Menu mnemonicParsing="false" text="View">
                     <items>
-                      <MenuItem fx:id="mMenu" mnemonicParsing="false" text="MENU" />
-                        <MenuItem fx:id="mMngmt" mnemonicParsing="false" text="MANEJO PROD." />
+                      <MenuItem fx:id="mMenu" mnemonicParsing="false" onAction="#loadMenuProducts" text="MENU" />
+                        <MenuItem fx:id="mMngmt" mnemonicParsing="false" onAction="#loadProductMngmt" text="MANEJO PROD." />
                         <MenuItem fx:id="mClients" mnemonicParsing="false" onAction="#loadClientsMngmt" text="CLIENTES" />
                         <MenuItem fx:id="mEmployees" mnemonicParsing="false" onAction="#loadEmployeesMngmt" text="EMPLEADOS" />
                         <MenuItem fx:id="mOrders" mnemonicParsing="false" text="PEDIDOS" />

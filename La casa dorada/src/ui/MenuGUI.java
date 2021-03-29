@@ -22,7 +22,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import model.Client;
 import model.Employee;
+import model.Ingredients;
 import model.LaCasaDorada;
+import model.Product;
 
 public class MenuGUI {
 	
@@ -82,6 +84,17 @@ public class MenuGUI {
 		borderPane.getChildren().clear();
     	borderPane.setCenter(addClientPane);
 
+    }
+    
+    @FXML
+    void loadMenuProducts(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menuProductos.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addClientPane = fxmlLoader.load();
+    	
+		borderPane.getChildren().clear();
+    	borderPane.setCenter(addClientPane);
     }
 
     //Clients window
@@ -152,6 +165,11 @@ public class MenuGUI {
         	borderPane.setCenter(addClientPane);
         	tvClientsList.setEditable(true);
         	initializeTableView();      	
+        }
+        
+        @FXML
+        void loadProductMngmt(ActionEvent event) {
+
         }
         
         //Table view
@@ -247,7 +265,9 @@ public class MenuGUI {
 
         @FXML
         void clearFormE(ActionEvent event) {
-
+        	nameE.clear();
+        	lastNameE.clear();
+        	identificationE.clear();
         }
 
         @FXML
@@ -336,10 +356,242 @@ public class MenuGUI {
         }
 
         @FXML
-        void deleteEmployee(ActionEvent event) throws NumberFormatException, IOException {
-		prueba.setText(laCasaDorada.deleteEmployee(searchBarE.getText()));    	
-		 	
+        void deleteEmployee(ActionEvent event) throws  IOException {
+		prueba.setText(laCasaDorada.deleteEmployee(searchBarE.getText())); 
+		borderPane.getChildren().clear(); 	
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EmployeeList.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addEmployeePane = fxmlLoader.load();
+    	borderPane.setCenter(addEmployeePane);
+    	tvEmployeeList.setEditable(true);
+    	initializeTableViewE();    	
         }
+        
+        //Menu de productos
+        @FXML
+        private BorderPane menuPane;
+        
+        @FXML
+        private Button editProducts;
+
+        @FXML
+        private TableView<Product> tvMenu;
+
+        @FXML
+        private TableColumn<Product, String> tcProduct;
+
+        @FXML
+        private TableColumn<Product, String> tcType;
+
+        @FXML
+        private TableColumn<Product, String> tcIngredients;
+
+        @FXML
+        private TableColumn<Product, String> tcPrice;
+        
+        @FXML
+        void loadProductMngmtWindow(ActionEvent event) throws IOException {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("products.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addClientPane = fxmlLoader.load();
+        	
+    		borderPane.getChildren().clear();
+        	borderPane.setCenter(addClientPane);
+        }
+        @FXML
+        void addProductWindow(ActionEvent event) throws IOException {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("productMngmt.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addClientPane = fxmlLoader.load();
+        	
+    		borderPane.getChildren().clear();
+        	borderPane.setCenter(addClientPane);
+        }
+        //Product Manegment
+        
+        @FXML
+        private BorderPane menuPaneNewProduct;
+
+        @FXML
+        private TextField newProductName;
+
+        @FXML
+        private TextField newProductType;
+
+        @FXML
+        private TextField newProductIngredients;
+
+        @FXML
+        private TextField newProductPrice;
+
+        @FXML
+        private Button saveNewProductBtn;
+
+        @FXML
+        private Button clearNewProductBtn;
+
+        @FXML
+        void clearNewProduct(ActionEvent event) {
+        	newProductName.clear();
+        	newProductType.clear();
+        	newProductIngredients.clear();
+        	newProductPrice.clear();
+        }
+
+        @FXML
+        void saveNewProduct(ActionEvent event) {
+        	newProductName.getText();
+        	newProductType.getText();
+        	newProductIngredients.getText();
+        	newProductPrice.getText();
+        }
+        
+        //Products
+        
+        @FXML
+        private BorderPane menuPaneProduct;
+
+        @FXML
+        private TextField searchBarProduct;
+
+        @FXML
+        private Button searchBtnProducts;
+
+        @FXML
+        private TextField productName;
+
+        @FXML
+        private TextField productType;
+
+        @FXML
+        private TextField productIngredients;
+
+        @FXML
+        private TextField productPrice;
+
+        @FXML
+        private Button saveProductBtn;
+
+        @FXML
+        private Button clearProductBtn;
+
+        @FXML
+        private Button cancelProductBtn;
+
+        @FXML
+        void cancelProduct(ActionEvent event) {
+
+        }
+
+        @FXML
+        void clearProduct(ActionEvent event) {
+
+        }
+
+        @FXML
+        void saveProduct(ActionEvent event) {
+
+        }
+
+        @FXML
+        void searchProduct(ActionEvent event) {
+
+        }
+        
+        //Ingredients
+        
+        @FXML
+        private Button seeIngredients;
+        
+        @FXML
+        private BorderPane menuPaneIngredient;
+
+        @FXML
+        private TextField searchBarIngredient;
+
+        @FXML
+        private Button searchBtnIngredient;
+
+        @FXML
+        private TextField IngredientsName;
+
+        @FXML
+        private Button saveProductIngredients;
+
+        @FXML
+        private Button clearProductIngredients;
+
+        @FXML
+        private Button cancelProductIngredients;
+
+        @FXML
+        private Button addNewIngredientBtn;
+
+        @FXML
+        private TextField newIngredient;
+
+        @FXML
+        void IngredientsCancel(ActionEvent event) {
+
+        }
+
+        @FXML
+        void IngredientsClear(ActionEvent event) {
+
+        }
+
+        @FXML
+        void IngredientsSave(ActionEvent event)  throws IOException {
+        	laCasaDorada.searchIngredientsO(Integer.parseInt(searchBarIngredient.getText()));
+        	IngredientsName.setTe
+        }
+
+        @FXML
+        void addNewIngredient(ActionEvent event) throws IOException {
+        	laCasaDorada.addIngredient(newIngredient.getText());
+        }
+
+        @FXML
+        void searchIngredients(ActionEvent event) throws NumberFormatException, IOException {
+        	IngredientsName.setText(laCasaDorada.searchIngredients(Integer.parseInt(searchBarIngredient.getText())));
+        }
+        @FXML
+        void loadIngredients(ActionEvent event) throws IOException {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ingredientsList.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addClientPane = fxmlLoader.load();
+        	
+    		borderPane.getChildren().clear();
+        	borderPane.setCenter(addClientPane);
+        }
+
+        //Ingredientes table
+        
+        @FXML
+        private BorderPane tableIngredients;
+        
+        @FXML
+        private TableView<Ingredients> tvIngredients;
+
+        @FXML
+        private TableColumn<Ingredients, String> tcCode;
+
+        @FXML
+        private TableColumn<Ingredients, String> tcNameI;
+        
+        private void initializeTableViewI() {
+        	ObservableList<Ingredients> observableList;
+        	observableList = FXCollections.observableArrayList(laCasaDorada.getIngredients());
+        	
+    		tvIngredients.setItems(observableList);
+    		tcCode.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("code")); //the tableview search for a method called getName
+    		tcNameI.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("name")); //the tableview search for a method called getEmail
+        }
+     
 }
 
     
