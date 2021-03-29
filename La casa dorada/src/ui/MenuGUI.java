@@ -96,6 +96,27 @@ public class MenuGUI {
 		borderPane.getChildren().clear();
     	borderPane.setCenter(addClientPane);
     }
+    
+    @FXML
+    void loadIngredientsWindow(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ingredients.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addClientPane = fxmlLoader.load();
+		borderPane.getChildren().clear();
+    	borderPane.setCenter(addClientPane);
+    }
+    
+    @FXML
+    void loadProductMngmt(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("products.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addClientPane = fxmlLoader.load();
+    	
+		borderPane.getChildren().clear();
+    	borderPane.setCenter(addClientPane);
+    }
 
     //Clients window
 
@@ -167,12 +188,7 @@ public class MenuGUI {
         	initializeTableView();      	
         }
         
-        @FXML
-        void loadProductMngmt(ActionEvent event) {
-
-        }
-        
-        //Table view
+        //Clients Table view
         @FXML
         private Button addContactBtn;
         
@@ -402,7 +418,7 @@ public class MenuGUI {
         }
         @FXML
         void addProductWindow(ActionEvent event) throws IOException {
-        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("productMngmt.fxml"));
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("productAddd.fxml"));
     		
     		fxmlLoader.setController(this);    	
     		Parent addClientPane = fxmlLoader.load();
@@ -410,7 +426,7 @@ public class MenuGUI {
     		borderPane.getChildren().clear();
         	borderPane.setCenter(addClientPane);
         }
-        //Product Manegment
+        //Product Manegement
         
         @FXML
         private BorderPane menuPaneNewProduct;
@@ -449,6 +465,17 @@ public class MenuGUI {
         	newProductPrice.getText();
         }
         
+        @FXML
+        void backProd(ActionEvent event) throws IOException {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menuProductos.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addClientPane = fxmlLoader.load();
+        	
+    		borderPane.getChildren().clear();
+        	borderPane.setCenter(addClientPane);
+        }
+        
         //Products
         
         @FXML
@@ -465,6 +492,9 @@ public class MenuGUI {
 
         @FXML
         private TextField productType;
+        
+        @FXML
+        private Button backBtnProd;
 
         @FXML
         private TextField productIngredients;
@@ -477,18 +507,22 @@ public class MenuGUI {
 
         @FXML
         private Button clearProductBtn;
-
+        
         @FXML
-        private Button cancelProductBtn;
-
+        private Button deleteProductBtn;
+        
         @FXML
-        void cancelProduct(ActionEvent event) {
+        void deleteProduct(ActionEvent event) {
 
         }
 
         @FXML
         void clearProduct(ActionEvent event) {
-
+        	searchBarProduct.clear();
+        	productName.clear();
+        	productType.clear();
+        	productIngredients.clear();
+        	productPrice.clear();
         }
 
         @FXML
@@ -525,28 +559,20 @@ public class MenuGUI {
         private Button clearProductIngredients;
 
         @FXML
-        private Button cancelProductIngredients;
-
-        @FXML
         private Button addNewIngredientBtn;
 
         @FXML
-        private TextField newIngredient;
-
-        @FXML
-        void IngredientsCancel(ActionEvent event) {
-
-        }
+        private TextField newIngredient;     
 
         @FXML
         void IngredientsClear(ActionEvent event) {
-
+        	IngredientsName.clear();
         }
 
         @FXML
         void IngredientsSave(ActionEvent event)  throws IOException {
-        	laCasaDorada.searchIngredientsO(Integer.parseInt(searchBarIngredient.getText()));
-        	IngredientsName.setTe
+        	Ingredients a = laCasaDorada.searchIngredientsO(Integer.parseInt(searchBarIngredient.getText()));
+        	IngredientsName.setText(a.getName());
         }
 
         @FXML
@@ -558,6 +584,7 @@ public class MenuGUI {
         void searchIngredients(ActionEvent event) throws NumberFormatException, IOException {
         	IngredientsName.setText(laCasaDorada.searchIngredients(Integer.parseInt(searchBarIngredient.getText())));
         }
+        
         @FXML
         void loadIngredients(ActionEvent event) throws IOException {
         	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ingredientsList.fxml"));
@@ -567,9 +594,13 @@ public class MenuGUI {
         	
     		borderPane.getChildren().clear();
         	borderPane.setCenter(addClientPane);
+        	initializeTableViewI();
         }
 
         //Ingredientes table
+        
+        @FXML
+        private Button iBackbtn;
         
         @FXML
         private BorderPane tableIngredients;
@@ -582,6 +613,16 @@ public class MenuGUI {
 
         @FXML
         private TableColumn<Ingredients, String> tcNameI;
+        
+        @FXML
+        void iBack(ActionEvent event) throws IOException {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ingredients.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addClientPane = fxmlLoader.load();
+    		borderPane.getChildren().clear();
+        	borderPane.setCenter(addClientPane);
+        }
         
         private void initializeTableViewI() {
         	ObservableList<Ingredients> observableList;

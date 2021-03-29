@@ -91,6 +91,12 @@ public class LaCasaDorada {
 			out.writeObject(ingredients);
 			out.close();
 		}
+			public void saveProducts() throws IOException {
+			FileOutputStream fos = new FileOutputStream("data/Saved_products.va");
+			ObjectOutputStream out = new ObjectOutputStream(fos);
+			out.writeObject(products);
+			out.close();
+		}
 
 		@SuppressWarnings("unchecked")
 		public void load() throws ClassNotFoundException, IOException {
@@ -113,6 +119,13 @@ public class LaCasaDorada {
 			FileInputStream fis = new FileInputStream(iload);
 			ObjectInputStream input = new ObjectInputStream(fis);
 			ingredients = (ArrayList<Ingredients>) input.readObject();
+			input.close();
+		}
+		File pload = new File("data/Saved_products.va");
+		if (pload.exists()) {
+			FileInputStream fis = new FileInputStream(pload);
+			ObjectInputStream input = new ObjectInputStream(fis);
+			products = (ArrayList<Product>) input.readObject();
 			input.close();
 		}
 		}
@@ -235,6 +248,35 @@ public class LaCasaDorada {
 		}
 		
 		return str;
+	}
+	public Ingredients searchIngredientsO(int code) throws IOException  {
+		Collections.sort(ingredients, new IngredientsCodeSort());
+		Ingredients sel = null;
+		String str = "";
+		boolean found = false;
+		int start = 0;
+		int end = ingredients.size();
+		while (start <= end && !found) {
+			int medium = (int) Math.floor((start + end) / 2);
+			if (medium != ingredients.size()) {
+				int mediumElement = ingredients.get(medium).getCode();
+				int compareResult = code - mediumElement ;
+				if (compareResult == 0) {
+					found = true;
+					sel = ingredients.get(medium);
+					str += sel.getName() + "\n" + sel.getCode() + "\n";
+				} else if (compareResult < 0)
+					end = medium - 1;
+				else if (compareResult > 0)
+					start = medium + 1;
+			}
+		}
+		if (found == false) {
+			str = "No hay ningun Productpo con el codigo: " + code + "\n";
+			
+		}
+		
+		return sel;
 	}
 	public String deleteIngredients(int code) throws IOException  {
 		Collections.sort(ingredients, new IngredientsCodeSort());
