@@ -1,6 +1,10 @@
 package model;
 
 public class Client extends Person {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 private String id;
 private String address;
 private String phone;
