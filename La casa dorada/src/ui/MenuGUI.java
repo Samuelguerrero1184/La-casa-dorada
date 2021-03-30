@@ -75,6 +75,17 @@ public class MenuGUI {
     }
     
     @FXML
+    void loadOrders(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("order.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addClientPane = fxmlLoader.load();
+    	
+		borderPane.getChildren().clear();
+    	borderPane.setCenter(addClientPane);
+    }
+    
+    @FXML
     void loadEmployeesMngmt(ActionEvent event) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employees.fxml"));
 		
@@ -578,6 +589,7 @@ public class MenuGUI {
         @FXML
         void addNewIngredient(ActionEvent event) throws IOException {
         	laCasaDorada.addIngredient(newIngredient.getText());
+        	newIngredient.clear();
         }
 
         @FXML
@@ -631,6 +643,35 @@ public class MenuGUI {
     		tvIngredients.setItems(observableList);
     		tcCode.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("code")); //the tableview search for a method called getName
     		tcNameI.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("name")); //the tableview search for a method called getEmail
+        }
+        @FXML
+        private BorderPane orderPane;
+
+        @FXML
+        private TextField searchBarProductAdd;
+
+        @FXML
+        private Button addProdOrder;
+
+        @FXML
+        private Button saveOrderBtn;
+
+        @FXML
+        private Button clearOrderBtn;
+
+        @FXML
+        void clearOrder(ActionEvent event) {
+
+        }
+
+        @FXML
+        void orderProd(ActionEvent event) {
+
+        }
+
+        @FXML
+        void saveOrder(ActionEvent event) {
+
         }
      
 }

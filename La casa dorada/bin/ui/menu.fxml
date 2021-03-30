@@ -20,7 +20,7 @@
                         <MenuItem fx:id="mMngmt" mnemonicParsing="false" onAction="#loadProductMngmt" text="MANEJO PROD." />
                         <MenuItem fx:id="mClients" mnemonicParsing="false" onAction="#loadClientsMngmt" text="CLIENTES" />
                         <MenuItem fx:id="mEmployees" mnemonicParsing="false" onAction="#loadEmployeesMngmt" text="EMPLEADOS" />
-                        <MenuItem fx:id="mOrders" mnemonicParsing="false" text="PEDIDOS" />
+                        <MenuItem fx:id="mOrders" mnemonicParsing="false" onAction="#loadOrders" text="PEDIDOS" />
                         <MenuItem fx:id="mMore" mnemonicParsing="false" onAction="#loadIngredientsWindow" text="MAS..." />
                     </items>
                   </Menu>
