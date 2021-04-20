@@ -20,7 +20,7 @@ public class LaCasaDorada {
 	private List<Client>clients;
 	private List<Employee>employee;
 	private List<Product>products;
-	private List<Ingredients>ingredients;
+	public List<Ingredients>ingredients;
 	public LaCasaDorada () {
 		userAcc = new ArrayList<>();
 		clients = new ArrayList<>();
@@ -59,7 +59,7 @@ public class LaCasaDorada {
 		userAcc.add(new User(name,lName,id,user,psw));
 		saveUsers();
 	}
-	public void addProduct(String name, String type, Ingredients ing, String size)throws IOException{
+	public void addProduct(String name, String type, ArrayList<Ingredients> ing, String size)throws IOException{
 		products.add(new Product(name,type,ing,size));
 		saveUsers();
 	}
@@ -329,9 +329,7 @@ public class LaCasaDorada {
 		}
 		if (found == false) {
 			str = "No hay ningun Ingrediente con el codigo: " + code + "\n";
-			
-		}
-		
+		}		
 		return sel;
 	}
 	public String deleteIngredients(int code) throws IOException  {
@@ -391,7 +389,6 @@ public class LaCasaDorada {
 		}
 		if (found == false) {
 			str = "No se encontro el producto '" + name +"'\n";
-			
 		}
 		return str;
 	}
@@ -484,6 +481,49 @@ public class LaCasaDorada {
 		return veh;
 
 	}
+		
+		public Ingredients searchIngredients(String id) {
+			Collections.sort(ingredients, new IngredientsCodeSort());
+			Ingredients veh = null;
+			System.out.println("1");
+			String str = "";
+			System.out.println("1");
+			boolean found = false;
+			System.out.println("1");
+			float start = 0;
+			float end = ingredients.size();
+			System.out.println("1");
+			while (start <= end && !found) {
+				System.out.println("while");
+				int medium = (int) Math.floor((start + end) / 2);
+				System.out.println("2");
+				if (medium != ingredients.size()) {
+					System.out.println("3");
+					String mediumElement = ingredients.get(medium).getName();
+					System.out.println("3");
+					float compareResult = id.compareToIgnoreCase(mediumElement);
+					System.out.println("3");
+					if (compareResult == 0) {
+						System.out.println("3");
+						found = true;
+						System.out.println("3");
+						veh = ingredients.get(medium);
+						System.out.println("3");
+						str += "Esta es la informacion del empleado:\n";
+						System.out.println("3");
+						str +=veh.getName();
+						System.out.println("3");
+					} else if (compareResult < 0)
+						end = medium - 1;
+					else if (compareResult > 0)
+						start = medium + 1;
+				}
+			}
+			if (found == false) {
+				str = "No se encontro un empleado con cedula " + id +"\n";			
+			}
+			return veh;
+		}
 	public String searchUserAndPassword(String ps) throws IOException{
 		Collections.sort(userAcc, new PasswordSort());
 		String veh = null;
@@ -517,6 +557,7 @@ public class LaCasaDorada {
 		File input = file;
 		if(input.exists()) {
 		FileReader fr = new FileReader (input);
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(fr);
 		String linea;
 		int contador = 0;

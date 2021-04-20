@@ -3,6 +3,7 @@ package ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -541,10 +542,17 @@ public class MenuGUI {
         void saveNewProduct(ActionEvent event) throws IOException {
         	String a = newProductName.getText();
         	String b = newProductType.getText();
-        	String c = addProdIngredients.getText();
         	String d = newProductPrice.getText();     	
-        	//laCasaDorada.addIngredient(a,b,c,d);
-        	System.out.println(a+b+c+d);
+        	String[]ing = addProdIngredients.getText().split(",");
+        	ArrayList<Ingredients>ingredients = new ArrayList<>();
+        	for (int i = 0;i<ing.length;i++) {
+        			if(laCasaDorada.searchIngredients(ing[i])==null) {
+        				laCasaDorada.addIngredient(ing[i]);
+        			}
+				String x = ing[i];
+				ingredients.add(laCasaDorada.searchIngredients(x));
+			}
+        	laCasaDorada.addProduct(a,b,ingredients,d);
         }
         
         @FXML
@@ -570,7 +578,7 @@ public class MenuGUI {
         private TableColumn<Product, String> tcProductType;
 
         @FXML
-        private TableColumn<Product, Ingredients> tcProductIngredients;
+        private TableColumn<Product, ArrayList<Ingredients>> tcProductIngredients;
 
         @FXML
         private TableColumn<Product, String> tcProductSize;
@@ -582,7 +590,7 @@ public class MenuGUI {
     		tvProducts.setItems(observableList);
     		tcNameProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("name")); //the tableview search for a method called getName
     		tcProductType.setCellValueFactory(new PropertyValueFactory<Product,String>("tipo")); //the tableview search for a method called getEmail
-    		tcProductIngredients.setCellValueFactory(new PropertyValueFactory<Product,Ingredients>("ingredients"));
+    		tcProductIngredients.setCellValueFactory(new PropertyValueFactory<Product,ArrayList<Ingredients>>("ingredients"));
     		tcProductSize.setCellValueFactory(new PropertyValueFactory<Product,String>("size"));
         }
 
