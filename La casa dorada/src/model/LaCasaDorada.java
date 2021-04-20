@@ -59,6 +59,11 @@ public class LaCasaDorada {
 		userAcc.add(new User(name,lName,id,user,psw));
 		saveUsers();
 	}
+	public void addProduct(String name, String type, Ingredients ing, String size)throws IOException{
+		products.add(new Product(name,type,ing,size));
+		saveUsers();
+	}
+	
 	public List<User> getUserAcc(){
 		return userAcc;
 	}

@@ -2,7 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -30,7 +33,7 @@
             <AnchorPane prefHeight="320.0" prefWidth="331.0">
                <children>
                   <Label layoutX="25.0" layoutY="134.0" prefHeight="155.0" prefWidth="282.0" />
-                  <GridPane layoutX="42.0" layoutY="61.0" prefHeight="198.0" prefWidth="247.0">
+                  <GridPane layoutX="45.0" layoutY="102.0" prefHeight="198.0" prefWidth="247.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,20 +45,26 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Producto" />
+                        <Label text="Nombre del Producto" />
                         <Label text="Tipo" GridPane.rowIndex="1" />
                         <Label text="Ingredientes" GridPane.rowIndex="2" />
                         <Label text="Tamaño y Precio" GridPane.rowIndex="3" />
                         <TextField fx:id="newProductName" GridPane.columnIndex="1" />
                         <TextField fx:id="newProductType" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="newProductIngredients" prefHeight="61.0" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="newProductPrice" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextArea fx:id="addProdIngredients" prefHeight="200.0" prefWidth="200.0" promptText="lechuga,cebolla,pepino,etc" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
+                  <ImageView fitHeight="89.0" fitWidth="437.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../comida.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
-            <Button fx:id="saveNewProductBtn" layoutX="489.0" layoutY="105.0" mnemonicParsing="false" onAction="#saveNewProduct" prefHeight="60.0" prefWidth="150.0" text="Agregar" />
-            <Button fx:id="clearNewProductBtn" layoutX="489.0" layoutY="190.0" mnemonicParsing="false" onAction="#clearNewProduct" prefHeight="25.0" prefWidth="150.0" text="Borrar" />
+            <Button fx:id="saveNewProductBtn" layoutX="449.0" layoutY="144.0" mnemonicParsing="false" onAction="#saveNewProduct" prefHeight="60.0" prefWidth="150.0" text="Agregar" />
+            <Button fx:id="clearNewProductBtn" layoutX="449.0" layoutY="229.0" mnemonicParsing="false" onAction="#clearNewProduct" prefHeight="25.0" prefWidth="150.0" text="Borrar" />
+            <Label fx:id="prodLabel" layoutX="624.0" layoutY="88.0" prefHeight="186.0" prefWidth="196.0" />
          </children>
       </Pane>
    </center>

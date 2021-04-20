@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -486,10 +487,13 @@ public class MenuGUI {
     		borderPane.getChildren().clear();
         	borderPane.setCenter(addClientPane);
         }
-        //Product Manegement
+        //add new products
         
         @FXML
         private BorderPane menuPaneNewProduct;
+
+        @FXML
+        private Button backBtnProd;
 
         @FXML
         private TextField newProductName;
@@ -498,8 +502,8 @@ public class MenuGUI {
         private TextField newProductType;
 
         @FXML
-        private TextField newProductIngredients;
-
+        private TextArea addProdIngredients;
+        
         @FXML
         private TextField newProductPrice;
 
@@ -510,19 +514,37 @@ public class MenuGUI {
         private Button clearNewProductBtn;
 
         @FXML
+        private Label prodLabel;
+        
+
+        @FXML
+        void loadProductList(ActionEvent event) throws IOException {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("productList.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addClientPane = fxmlLoader.load();
+        	
+    		borderPane.getChildren().clear();
+        	borderPane.setCenter(addClientPane);
+        	initializeTableViewP();
+        }
+
+        @FXML
         void clearNewProduct(ActionEvent event) {
         	newProductName.clear();
         	newProductType.clear();
-        	newProductIngredients.clear();
+        	addProdIngredients.clear();
         	newProductPrice.clear();
         }
 
         @FXML
-        void saveNewProduct(ActionEvent event) {
-        	newProductName.getText();
-        	newProductType.getText();
-        	newProductIngredients.getText();
-        	newProductPrice.getText();
+        void saveNewProduct(ActionEvent event) throws IOException {
+        	String a = newProductName.getText();
+        	String b = newProductType.getText();
+        	String c = addProdIngredients.getText();
+        	String d = newProductPrice.getText();     	
+        	//laCasaDorada.addIngredient(a,b,c,d);
+        	System.out.println(a+b+c+d);
         }
         
         @FXML
@@ -536,7 +558,36 @@ public class MenuGUI {
         	borderPane.setCenter(addClientPane);
         }
         
-        //Products
+        //product table
+
+        @FXML
+        private TableView<Product> tvProducts;
+
+        @FXML
+        private TableColumn<Product, String> tcNameProduct;
+
+        @FXML
+        private TableColumn<Product, String> tcProductType;
+
+        @FXML
+        private TableColumn<Product, Ingredients> tcProductIngredients;
+
+        @FXML
+        private TableColumn<Product, String> tcProductSize;
+        
+        private void initializeTableViewP() {
+        	ObservableList<Product> observableList;
+        	observableList = FXCollections.observableArrayList(laCasaDorada.getProducts());
+        	
+    		tvProducts.setItems(observableList);
+    		tcNameProduct.setCellValueFactory(new PropertyValueFactory<Product,String>("name")); //the tableview search for a method called getName
+    		tcProductType.setCellValueFactory(new PropertyValueFactory<Product,String>("tipo")); //the tableview search for a method called getEmail
+    		tcProductIngredients.setCellValueFactory(new PropertyValueFactory<Product,Ingredients>("ingredients"));
+    		tcProductSize.setCellValueFactory(new PropertyValueFactory<Product,String>("size"));
+        }
+
+        
+        //Products gestion
         
         @FXML
         private BorderPane menuPaneProduct;
@@ -554,10 +605,7 @@ public class MenuGUI {
         private TextField productType;
         
         @FXML
-        private Button backBtnProd;
-
-        @FXML
-        private TextField productIngredients;
+        private TextArea ingredients4NewProduct;
 
         @FXML
         private TextField productPrice;
@@ -584,7 +632,7 @@ public class MenuGUI {
         	searchBarProduct.clear();
         	productName.clear();
         	productType.clear();
-        	productIngredients.clear();
+        	ingredients4NewProduct.clear();
         	productPrice.clear();
         }
 
@@ -696,6 +744,8 @@ public class MenuGUI {
     		tcCode.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("code")); //the tableview search for a method called getName
     		tcNameI.setCellValueFactory(new PropertyValueFactory<Ingredients,String>("name")); //the tableview search for a method called getEmail
         }
+        
+        //ordenar pedidos
         @FXML
         private BorderPane orderPane;
 

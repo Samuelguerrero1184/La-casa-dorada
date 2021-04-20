@@ -12,7 +12,7 @@ private String name;
 private String tipo;
 private String size;
 private ArrayList<Ingredients> ingredients;
-	public Product(String name, String tipo, String size){
+	public Product(String name, String tipo,Ingredients ing, String size){
 		this.name = name;
 		this.tipo = tipo;
 		this.size = size;
