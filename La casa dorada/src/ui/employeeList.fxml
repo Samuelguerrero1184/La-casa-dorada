@@ -40,7 +40,7 @@
                         <Label layoutX="177.0" layoutY="6.0" text="Gestionar Empleado" />
                         <AnchorPane fx:id="gestionEmployee" layoutX="86.0" layoutY="83.0" prefHeight="197.0" prefWidth="290.0">
                            <children>
-                              <Label fx:id="prueba" layoutX="5.0" layoutY="57.0" prefHeight="50.0" prefWidth="291.0">
+                              <Label fx:id="prueba" layoutX="5.0" layoutY="13.0" prefHeight="136.0" prefWidth="291.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

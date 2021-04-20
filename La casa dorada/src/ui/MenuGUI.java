@@ -1,5 +1,7 @@
 package ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.collections.FXCollections;
@@ -8,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -15,15 +19,20 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import model.Client;
 import model.Employee;
 import model.Ingredients;
 import model.LaCasaDorada;
 import model.Product;
+import model.User;
 
 public class MenuGUI {
 	
@@ -34,7 +43,7 @@ public class MenuGUI {
 	}
 	
 	public void initialize() throws ClassNotFoundException, IOException {
-		laCasaDorada.load();
+		//laCasaDorada.load();
     	//the method (initialize) is called several times by diferents fxml file loads 
     }
 
@@ -128,6 +137,35 @@ public class MenuGUI {
     	borderPane.setCenter(addClientPane);
     }
 
+    @FXML
+    void loadExportandImport(ActionEvent event) throws FileNotFoundException, IOException {
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Open Resource File");
+    	Stage stage = new Stage();
+    	File file = fileChooser.showOpenDialog(stage);
+    	if (file != null) {
+            laCasaDorada.importClients(file);
+        }
+    	else{
+    	Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("No File!");
+		alert.setHeaderText("No File!");
+		alert.setContentText("No File!");
+		alert.showAndWait();
+    	}
+    }
+ 
+    @FXML
+    void loadUserTable(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userList.fxml"));
+		
+		fxmlLoader.setController(this);    	
+		Parent addClientPane = fxmlLoader.load();
+    	
+		borderPane.getChildren().clear();
+    	borderPane.setCenter(addClientPane);
+    	initializeTableViewU();
+    }
     //Clients window
 
         @FXML
@@ -192,15 +230,17 @@ public class MenuGUI {
     		fxmlLoader.setController(this);    	
     		Parent addClientPane = fxmlLoader.load();
         	
-    		borderPane.getChildren().clear();
-        	borderPane.setCenter(addClientPane);
+    		Scene scene = new Scene(addClientPane);
+    		Stage stage = new Stage();
+    		stage.setScene(scene);
+    		stage.setHeight(400);
+    		stage.setWidth(1107);
+    		stage.show();
         	tvClientsList.setEditable(true);
         	initializeTableView();      	
         }
         
         //Clients Table view
-        @FXML
-        private Button addContactBtn;
         
         @FXML
         private ScrollPane tablePane;
@@ -226,6 +266,26 @@ public class MenuGUI {
         @FXML
         private TableColumn<Client, String> tcComments;
 
+        @FXML
+        private TextField clientSearchBar;
+        
+        @FXML
+        private Label clientLabel;
+
+        @FXML
+        private Button clientDeleteBtn;
+
+        @FXML
+        void clientDelete(ActionEvent event) throws IOException {
+        	clientLabel.setText(laCasaDorada.deleteClients(clientSearchBar.getText()));
+
+        }
+
+        @FXML
+        void clientSearchBtn(ActionEvent event) {
+        	clientLabel.setText(laCasaDorada.searchClients(clientSearchBar.getText()));
+        	clientDeleteBtn.setVisible(true);
+        }
 
         private void initializeTableView() {
         	ObservableList<Client> observableList;
@@ -238,17 +298,7 @@ public class MenuGUI {
     		tcAddress.setCellValueFactory(new PropertyValueFactory<Client,String>("address"));
     		tcPhone.setCellValueFactory(new PropertyValueFactory<Client,String>("phone"));
     		tcComments.setCellValueFactory(new PropertyValueFactory<Client,String>("comments"));
-        }
-        @FXML
-        void addContact(ActionEvent event) throws IOException {
-        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("clients.fxml"));
-    		
-    		fxmlLoader.setController(this);    	
-    		Parent addClientPane = fxmlLoader.load();
-        	
-    		borderPane.getChildren().clear();
-        	borderPane.setCenter(addClientPane);
-        }          
+        }    
         
        
         //Employee window 
@@ -522,6 +572,9 @@ public class MenuGUI {
         private Button deleteProductBtn;
         
         @FXML
+        private GridPane gridPane;
+        
+        @FXML
         void deleteProduct(ActionEvent event) {
 
         }
@@ -542,7 +595,7 @@ public class MenuGUI {
 
         @FXML
         void searchProduct(ActionEvent event) {
-
+        	gridPane.setDisable(false);
         }
         
         //Ingredients
@@ -582,7 +635,7 @@ public class MenuGUI {
         @FXML
         void IngredientsSave(ActionEvent event)  throws IOException {
         	Ingredients a = laCasaDorada.searchIngredientsO(Integer.parseInt(searchBarIngredient.getText()));
-        	IngredientsName.setText(a.getName());
+			a.setName(IngredientsName.getText());
         }
 
         @FXML
@@ -672,7 +725,60 @@ public class MenuGUI {
         void saveOrder(ActionEvent event) {
 
         }
-     
+ 
+        //User Tableview
+
+        @FXML
+        private TableView<User> userTableview;
+
+        @FXML
+        private TableColumn<User, String> tvUserName;
+
+        @FXML
+        private TableColumn<User, String> tvUserLastname;
+
+        @FXML
+        private TableColumn<User, String> tvUserId;
+
+        @FXML
+        private TableColumn<User, String> tvUserUser;
+
+        @FXML
+        private Label statusSearch;
+        
+        @FXML
+        private TextField searchBarUser;
+        
+        @FXML
+        void searchUser(ActionEvent event) throws IOException {
+        	statusSearch.setText(laCasaDorada.searchUser(searchBarUser.getText()));
+        }
+        
+        @FXML
+        void deleteUserBtn(ActionEvent event) throws IOException {
+        	statusSearch.setText(laCasaDorada.deleteUser(searchBarUser.getText())); 
+    		borderPane.getChildren().clear(); 	
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("userList.fxml"));
+    		
+    		fxmlLoader.setController(this);    	
+    		Parent addEmployeePane = fxmlLoader.load();
+        	borderPane.setCenter(addEmployeePane);
+        	initializeTableViewU();
+        }
+
+
+        private void initializeTableViewU() {
+        	ObservableList<User> observableList;
+        	observableList = FXCollections.observableArrayList(laCasaDorada.getUserAcc());
+        	
+    		userTableview.setItems(observableList);
+    		tvUserName.setCellValueFactory(new PropertyValueFactory<User, String>("name")); //the tableview search for a method called getName
+    		tvUserLastname.setCellValueFactory(new PropertyValueFactory<User, String>("lastname")); //the tableview search for a method called getEmail
+    		tvUserId.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
+    		tvUserUser.setCellValueFactory(new PropertyValueFactory<User, String>("user"));
+    		
+        }
+        
 }
 
     

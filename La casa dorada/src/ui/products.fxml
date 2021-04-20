@@ -31,7 +31,7 @@
                   <TextField fx:id="searchBarProduct" layoutX="26.0" layoutY="46.0" prefHeight="25.0" prefWidth="232.0" promptText="Ingrese nombre de Producto" />
                   <Button fx:id="searchBtnProducts" layoutX="257.0" layoutY="46.0" mnemonicParsing="false" onAction="#searchProduct" text="Buscar" />
                   <Label layoutX="25.0" layoutY="134.0" prefHeight="155.0" prefWidth="282.0" />
-                  <GridPane layoutX="42.0" layoutY="91.0" prefHeight="198.0" prefWidth="247.0">
+                  <GridPane fx:id="gridPane" disable="true" layoutX="42.0" layoutY="91.0" prefHeight="198.0" prefWidth="247.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

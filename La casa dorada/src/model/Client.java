@@ -4,7 +4,7 @@ public class Client extends Person {
 /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8013304748695375727L;
 private String id;
 private String address;
 private String phone;

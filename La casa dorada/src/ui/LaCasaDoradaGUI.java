@@ -8,9 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.LaCasaDorada;
@@ -26,10 +27,13 @@ public class LaCasaDoradaGUI {
 		
 	}
 	
-	public void initialize() {
+	public void initialize()  throws ClassNotFoundException, IOException{
+		laCasaDorada.load();
     	//the method (initialize) is called several times by diferents fxml file loads 
     }
 
+	
+	//login interface
     @FXML
     private BorderPane mainPane;
 
@@ -40,9 +44,24 @@ public class LaCasaDoradaGUI {
     private PasswordField pfPassword;
 
     @FXML
+    void createUser(ActionEvent event) throws IOException {
+    	FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("addUserGUI.fxml"));
+		
+    	fxmlloader.setController(this);
+    	Parent menu = fxmlloader.load();  
+    	Scene scene = new Scene(menu);
+    	Stage stage = new Stage();
+    	stage.setScene(scene);
+    	stage.show();
+    }
+
+    @FXML
     void loginUser(ActionEvent event) throws IOException {
-    	if(txtUsername.getText().equals("admin")) {
-    		if(pfPassword.getText().equals("123")) {
+		System.out.println(txtUsername.getText());
+    	if(txtUsername.getText().equals(laCasaDorada.searchUserAndname(txtUsername.getText()))) {
+    		if(pfPassword.getText().equals(laCasaDorada.searchUserAndPassword(pfPassword.getText()))) {
+	
+	
     			//loadMenu();
     			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("menu.fxml"));
     	    	
@@ -55,7 +74,7 @@ public class LaCasaDoradaGUI {
     	    	Stage stage = new Stage();
     	    	stage.setScene(scene);
     	    	stage.setTitle("La casa Dorada");
-    	    	stage.setResizable(false);
+    	    	//stage.setResizable(false);
     	    	stage.show();
     	    	
     	    	
@@ -77,6 +96,42 @@ public class LaCasaDoradaGUI {
     		txtUsername.clear();
     		pfPassword.clear();
     	}
+    }
+    //add user interface
+    
+    @FXML
+    private BorderPane addUserPane;
+
+    @FXML
+    private TextField userName;
+
+    @FXML
+    private TextField userLastname;
+
+    @FXML
+    private TextField userId;
+
+    @FXML
+    private TextField userPassword;
+
+    @FXML
+    private TextField userUser;
+    
+    @FXML
+    private Label statusUser;
+
+    @FXML
+    void addUser(ActionEvent event) throws IOException {
+      	//add contact in the model        
+    	laCasaDorada.addUser(userName.getText(),userLastname.getText(),userId.getText(),userUser.getText(),userPassword.getText());
+    	//clean the fields in the gui       
+    	userName.setText("");
+    	userLastname.setText("");
+    	userId.setText("");
+    	userUser.setText("");
+    	userPassword.setText("");
+    	//show the success message
+    	statusUser.setText("Agregado!");
     }
 }
   
